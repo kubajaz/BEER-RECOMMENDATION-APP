@@ -94,3 +94,4 @@ Proponowana technologia: Django + HTML + CCS + JavaScript
 ### Makieta głownego interfejsu
 
 ![alt text](interfejs.png "")
+
