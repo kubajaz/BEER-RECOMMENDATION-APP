@@ -35,7 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'beers.apps.BeersConfig',
+    'rest_framework',
+    'beers',
+    'authentication',
 ]
 
 MIDDLEWARE = [
