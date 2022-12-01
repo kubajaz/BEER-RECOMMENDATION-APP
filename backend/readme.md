@@ -19,3 +19,5 @@ beers/<int:pk/reviews/<int:pk>/comments/
 beers/<int:pk/reviews/<int:pk>/comments/<int:pk>/
 
 pogrzebałem przy autoryzacji ale na razie nie jest do niczego podłączone
+
+dodałem post, put, delete które wydają się spoko działać

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -10,8 +11,8 @@ from beers.serializers import BeerSerializer, ReviewSerializer, CommentSerialize
 def api_overview(request):
     api = {
         'Beers': '/api/v1/beers/',
-        'Reviews': 'api/v1/reviews/<int:beer_pk>/',
-        'Comments': 'api/v1/comments/<int:review_pk>/'
+        'Reviews': 'api/v1/beers/<int:beer_pk>/reviews/',
+        'Comments': 'api/v1/beers/<int:beer_pk>/reviews/<int:review_pk>/comments'
     }
     return Response(api)
 
@@ -22,6 +23,12 @@ def beers_list(request):
         beers = Beer.objects.filter()
         serializer = BeerSerializer(beers, many=True)
         return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = BeerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -35,6 +42,16 @@ def beer_detail(request, beer_pk):
         serializer = BeerSerializer(beer)
         return Response(serializer.data)
 
+    elif request.method == 'PUT':
+        serializer = BeerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        beer.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 @api_view(['GET', 'POST'])
 def reviews_list(request, beer_pk):
@@ -42,6 +59,12 @@ def reviews_list(request, beer_pk):
         reviews = Review.objects.filter(beer=beer_pk)
         serializer = ReviewSerializer(reviews, many=True)
         return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = ReviewSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -57,6 +80,15 @@ def review_details(request, beer_pk, review_pk):
     if request.method == 'GET':
         serializer = ReviewSerializer(review)
         return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = ReviewSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        review.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET', 'POST'])
@@ -65,6 +97,12 @@ def comments_list(request, beer_pk, review_pk):
         comments = Comment.objects.filter(review=review_pk)
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -83,3 +121,12 @@ def comment_detail(request, beer_pk, review_pk, comment_pk):
     if request.method == 'GET':
         serializer = CommentSerializer(comment)
         return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
