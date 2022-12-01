@@ -11,13 +11,15 @@
 
 01.12.2022
 działa get w API
-beers/
-beers/<int:pk>/
-beers/<int:pk/reviews/
-beers/<int:pk/reviews/<int:pk>/
-beers/<int:pk/reviews/<int:pk>/comments/
-beers/<int:pk/reviews/<int:pk>/comments/<int:pk>/
+
+    beers/
+    beers/<int:pk>/
+    beers/<int:pk/reviews/
+    beers/<int:pk/reviews/<int:pk>/
+    beers/<int:pk/reviews/<int:pk>/comments/
+    beers/<int:pk/reviews/<int:pk>/comments/<int:pk>/
 
 pogrzebałem przy autoryzacji ale na razie nie jest do niczego podłączone
 
 dodałem post, put, delete które wydają się spoko działać
+
