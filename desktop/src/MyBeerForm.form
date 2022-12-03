@@ -95,7 +95,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <scrollpane id="70285" binding="reviewPane">
+              <scrollpane id="70285">
                 <constraints border-constraint="Center"/>
                 <properties/>
                 <border type="none"/>
@@ -106,7 +106,7 @@
                     <border type="none"/>
                     <children>
                       <component id="cebaa" class="javax.swing.JTextPane" binding="beerInfo">
-                        <constraints border-constraint="East"/>
+                        <constraints border-constraint="Center"/>
                         <properties/>
                       </component>
                       <component id="1e18e" class="javax.swing.JLabel" binding="beerImage">

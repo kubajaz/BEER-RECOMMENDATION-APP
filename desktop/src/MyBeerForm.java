@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
 
 public class MyBeerForm {
@@ -11,16 +13,32 @@ public class MyBeerForm {
     private JPanel mainPanel;
     private JLabel beerImage;
     private JScrollPane beerPane;
-    private JScrollPane reviewPane;
     private JPanel reviewPanel;
 
     MyBeerForm() {
+        searchField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (searchField.getText().equals("Search")) {
+                    searchField.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (searchField.getText().isEmpty()) {
+                    searchField.setText("Search");
+                }
+            }
+        });
+        searchField.addActionListener(e->System.out.printf("Searching for %s!%n", searchField.getText()));
+
         ImageIcon searchIcon = new ImageIcon(getScaledImage(new ImageIcon("loupe.png").getImage(), 30, 30));
         searchButton.addActionListener(e->System.out.printf("Searching for %s!%n", searchField.getText()));
         searchButton.setIcon(searchIcon);
 
         ImageIcon userIcon = new ImageIcon(getScaledImage(new ImageIcon("user.png").getImage(), 30, 30));
-        userButton.addActionListener(e->System.out.println("Getting user data"));
+        userButton.addActionListener(e->System.out.println("Displaying user data"));
         userButton.setIcon(userIcon);
 
         ImageIcon beerIcon = new ImageIcon(getScaledImage(new ImageIcon("beer.png").getImage(), 200, 200));
@@ -44,10 +62,10 @@ public class MyBeerForm {
                 </body>
                 </html>""");
         DefaultListModel reviewListModel = new DefaultListModel();
+        reviewPanel.add(new JList(reviewListModel), BorderLayout.SOUTH);
         for(int i=1; i<=30; i++) {
             reviewListModel.addElement(String.format("Some review%d", i));
         }
-        reviewPanel.add(new JList(reviewListModel), BorderLayout.SOUTH);
 
         JFrame wndFrame = new JFrame();
         wndFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
