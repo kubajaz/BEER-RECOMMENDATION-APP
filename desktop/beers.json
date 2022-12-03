@@ -1,0 +1,148 @@
+[
+    {
+        "name": "beer1",
+        "score": 4.5,
+        "photo": "beer.png",
+        "description_type": "text/html",
+        "description": "<html><body><h1>Some beer info</h1><br><p>Some paragraph about it</p></body></html>",
+        "comments": [
+            {
+                "user": "User1",
+                "comment": "Beer not good. Try better",
+                "replies": [
+                    {
+                        "user": "User2",
+                        "comment": "No U",
+                        "replies": []
+                    },
+                    {
+                        "user": "User3",
+                        "comment": ":^(",
+                        "replies": [
+                            {
+                                "user": "User1",
+                                "comment": "?",
+                                "replies": [
+                                    {
+                                        "user": "User3",
+                                        "comment": "¯\\_(ツ)_/¯",
+                                        "replies": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "user": "User4",
+                "comment": "Beer good 👍",
+                "replies": [
+                    {
+                        "user": "User1",
+                        "comment": ">:(",
+                        "replies": [
+                            {
+                                "user": "User1",
+                                "comment": "No NOT good",
+                                "replies": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "beer2",
+        "score": 8.5,
+        "photo": "beer.png",
+        "description_type": "text/html",
+        "description": "<html><body><h1>Some beer info</h1><br><p>Some paragraph about it</p></body></html>",
+        "comments": [
+            {
+                "user": "User1",
+                "comment": "I like it 5/10",
+                "replies": [
+                    {
+                        "user": "User2",
+                        "comment": "Why 5/10?",
+                        "replies": [
+                            {
+                                "user": "User2",
+                                "comment": "¯\\_(ツ)_/¯",
+                                "replies": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "beer3",
+        "score": 7.9,
+        "photo": "beer.png",
+        "description_type": "text/html",
+        "description": "<html><body><h1>Some beer info</h1><br><p>Some paragraph about it</p></body></html>",
+        "comments": [
+            {
+                "user": "User3",
+                "comment": "It's ok",
+                "replies": [
+                    {
+                        "user": "User1",
+                        "comment": "👍",
+                        "replies": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "beer4",
+        "score": 2.1,
+        "photo": "beer.png",
+        "description_type": "text/html",
+        "description": "<html><body><h1>Some beer info</h1><br><p>Some paragraph about it</p></body></html>",
+        "comments": [
+            {
+                "user": "User2",
+                "comment": "meh",
+                "replies": [
+                    {
+                        "user": "User4",
+                        "comment": ":(",
+                        "replies": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "beer5",
+        "score": 3.7,
+        "photo": "beer.png",
+        "description_type": "text/html",
+        "description": "<html><body><h1>Some beer info</h1><br><p>Some paragraph about it</p></body></html>",
+        "comments": [
+            {
+                "user": "User6",
+                "comment": "Don't bother",
+                "replies": [
+                    {
+                        "user": "User5",
+                        "comment": "Agree",
+                        "replies": [
+                            {
+                                "user": "User6",
+                                "comment": ":)",
+                                "replies": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
