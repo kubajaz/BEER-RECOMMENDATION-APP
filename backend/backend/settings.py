@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'beers',
-    'authentication',
+    'users',
+    'knox'
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,7 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'mediafiles')
 
 # URL used to access the media
 MEDIA_URL = '/media/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
+}
