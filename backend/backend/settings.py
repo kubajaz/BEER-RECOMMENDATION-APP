@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'beers',
     'users',
-    'knox'
+    'knox',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -128,5 +129,8 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'mediafiles')
 MEDIA_URL = '/media/'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
 }

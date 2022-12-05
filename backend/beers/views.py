@@ -3,17 +3,14 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from beers.filters import ReviewFilter, CommentFilter
 from beers.models import Beer, Review, Comment
 from beers.serializers import BeerSerializer, ReviewSerializer, CommentSerializer
 
 
 @api_view(['GET'])
 def api_overview(request):
-    api = {
-        'Beers': '/api/v1/beers/',
-        'Reviews': 'api/v1/beers/<int:beer_pk>/reviews/',
-        'Comments': 'api/v1/beers/<int:beer_pk>/reviews/<int:review_pk>/comments'
-    }
+    api = {}
     return Response(api)
 
 
@@ -54,9 +51,9 @@ def beer_detail(request, beer_pk):
 
 
 @api_view(['GET', 'POST'])
-def reviews_list(request, beer_pk):
+def reviews_list(request):
     if request.method == 'GET':
-        reviews = Review.objects.filter(beer=beer_pk)
+        reviews = ReviewFilter(request.GET, queryset=Review.objects.all()).qs
         serializer = ReviewSerializer(reviews, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
@@ -68,9 +65,8 @@ def reviews_list(request, beer_pk):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def review_details(request, beer_pk, review_pk):
+def review_details(request, review_pk):
     try:
-        beer = Beer.objects.get(pk=beer_pk)
         review = Review.objects.get(pk=review_pk)
     except Beer.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -92,9 +88,9 @@ def review_details(request, beer_pk, review_pk):
 
 
 @api_view(['GET', 'POST'])
-def comments_list(request, beer_pk, review_pk):
+def comments_list(request):
     if request.method == 'GET':
-        comments = Comment.objects.filter(review=review_pk)
+        comments = CommentFilter(request.GET, queryset=Comment.objects.all()).qs
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
@@ -106,10 +102,8 @@ def comments_list(request, beer_pk, review_pk):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def comment_detail(request, beer_pk, review_pk, comment_pk):
+def comment_detail(request, comment_pk):
     try:
-        beer = Beer.objects.get(pk=beer_pk)
-        review = Review.objects.get(pk=review_pk)
         comment = Comment.objects.get(pk=comment_pk)
     except Beer.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
